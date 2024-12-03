@@ -9,6 +9,9 @@ from .serializers import ProductSerializer, CustomerSerializer, OrderSerializer
 from django.shortcuts import render
 from django.views.generic import ListView, DetailView, CreateView
 from .forms import ProductForm
+from rest_framework.permissions import IsAuthenticated
+from .permissions import IsAdminOrReadOnly
+
 
 def hello_world(request):
     return HttpResponse("Hello World")
@@ -16,14 +19,17 @@ def hello_world(request):
 class ProductViewSet(viewsets.ModelViewSet):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
+    permission_classes = [IsAuthenticated, IsAdminOrReadOnly]
 
 class CustomerViewSet(viewsets.ModelViewSet):
     queryset = Customer.objects.all()
     serializer_class = CustomerSerializer
+    permission_classes = [IsAuthenticated, IsAdminOrReadOnly]
 
 class OrderViewSet(viewsets.ModelViewSet):
     queryset = Order.objects.all()
     serializer_class = OrderSerializer
+    permission_classes = [IsAuthenticated, IsAdminOrReadOnly]
 
 class ProductListView(ListView):
     model = Product
