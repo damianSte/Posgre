@@ -1,14 +1,12 @@
 from django.core.exceptions import ValidationError
 from django.db import models
+from django.db.models.fields import DecimalField
+
 
 class Customer(models.Model):
     id = models.AutoField(primary_key=True)
-    name = models.CharField(max_length=100)
-    address = models.CharField(max_length=255)
-
-    def clean(self):
-        if self.price < 0:
-            raise ValidationError("Price must be positive.")
+    name = models.CharField(max_length=100, null=False)
+    address = models.CharField(max_length=255, null=False)
 
     def __str__(self):
         return self.name
@@ -17,8 +15,17 @@ class Customer(models.Model):
 class Product(models.Model):
     id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=255)
-    price = models.DecimalField(max_digits=10, decimal_places=2)
-    available = models.BooleanField(default=True)
+    price = models.DecimalField(decimal_places=2, max_digits=10)
+    available = models.BooleanField()
+
+    def clean(self):
+        try:
+            if self.price is not None:
+                DecimalField(self.price)
+                if self.price < 0:
+                    raise ValidationError("Price must be positive.")
+        except (TypeError):
+            raise ValidationError("Price must be a valid decimal number.")
 
     def __str__(self):
         return self.name
