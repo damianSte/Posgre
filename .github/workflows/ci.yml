@@ -21,7 +21,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          python -m venv venv  
+          python -m venv myenv  
           source myenv/bin/activate  # Activate myenv
           pip install -r requirements.txt
 
