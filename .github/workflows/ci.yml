@@ -1,5 +1,5 @@
 name: software-engineering-lab-9
-######
+
 on:
   push:
     branches:
@@ -79,4 +79,3 @@ jobs:
           git push origin main
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-##

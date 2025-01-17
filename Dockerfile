@@ -3,7 +3,7 @@
   WORKDIR /dockertest
   COPY requirements.txt .
   RUN pip install -r requirements.txt
-  COPY Django /dockertest/djangoProject
+  COPY djangoProjectLab6/ dockertest/djangoProject
   ENV PYTHONDONTWRITEBYTECODE 1
   ENV PYTHONUNBUFFERED 1
   EXPOSE 9999
