@@ -1,9 +1,9 @@
 ##
   FROM python:3.12
-  WORKDIR /dockertest
-  COPY requirements.txt .
+  RUN apt-get update && apt-get install -y git
+  RUN git clone https://github.com/damianSte/Posgre.git
+  WORKDIR /Postgre
   RUN pip install -r requirements.txt
-  COPY djangoProjectLab6/ dockertest/djangoProject
   ENV PYTHONDONTWRITEBYTECODE 1
   ENV PYTHONUNBUFFERED 1
   EXPOSE 9999
