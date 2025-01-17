@@ -7,4 +7,4 @@
   ENV PYTHONDONTWRITEBYTECODE 1
   ENV PYTHONUNBUFFERED 1
   EXPOSE 9999
-  CMD ["python", "djangoProject/manage.py", "runserver", "0.0.0.0:9999"]
+  CMD ["python", "djangoProjectLab6/manage.py", "runserver", "0.0.0.0:9999"]
