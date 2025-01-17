@@ -16,7 +16,6 @@ from rest_framework.filters import SearchFilter
 def hello_world(request):
     return HttpResponse("Hello World")
 
-
 class ProductViewSet(viewsets.ModelViewSet):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
