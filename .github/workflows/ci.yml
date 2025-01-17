@@ -6,30 +6,70 @@ on:
       - main
 
 jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    # Configure the database service
+    services:
+      db:
+        image: postgres:17
+        env:
+          POSTGRES_USER: testuser
+          POSTGRES_PASSWORD: testpassword
+          POSTGRES_DB: testdb
+        ports:
+          - 5432:5432
+
+    steps:
+      # Step 1: Check out code
+      - name: Check out code
+        uses: actions/checkout@v2
+
+      # Step 2: Set up Docker
+      - name: Set up Docker
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y docker-compose
+
+      # Step 3: Build and start containers
+      - name: Build and start Containers
+        run: docker-compose up --build -d
+
+      # Step 4: Execute unit tests
+      - name: Execute unit tests
+        run: docker exec $(docker-compose ps -q api) python djangoProjectLab6/manage.py test djangoProjectLab6/myapp/tests
+
   docs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+    needs: test  # Make sure docs only run if the test job is successful
+
     steps:
+      # Step 1: Check out code
       - name: Check out code
         uses: actions/checkout@v2
 
+      # Step 2: Set up environment
       - name: Set up environment
         uses: actions/setup-python@v2
         with:
           python-version: 3.12
 
+      # Step 3: Install dependencies
       - name: Install dependencies
         run: |
           python -m venv myenv  
           source myenv/bin/activate 
           pip install -r requirements.txt
 
+      # Step 4: Generate API documentation
       - name: Generate API documentation
         run: |
           source myenv/bin/activate 
           python manage.py generateschema > docs.json
 
+      # Step 5: Commit and push documentation
       - name: Commit and push documentation
         run: |
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
