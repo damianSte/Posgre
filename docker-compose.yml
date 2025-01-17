@@ -1,7 +1,7 @@
 services:
   api:
     build:
-      context: ../../../../SEDocker-Copy/Docker
+      context: ../../../../djangoProjectLab6/Docker
       dockerfile: "Dockerfile"
     ports:
       - "9999:9999"
