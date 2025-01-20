@@ -30,8 +30,7 @@ jobs:
         run: docker-compose up --build -d
 
       - name: Execute unit tests
-        run: docker exec $(docker-compose ps -q api) python
-             djangoProjectLab6/manage.py test djangoProjectLab6/myapp/tests
+        run: docker exec $(docker-compose ps -q api) python manage.py test myapp/tests
 
 
   docs:
@@ -63,7 +62,7 @@ jobs:
         run: docker-compose up --build -d
 
       - name: Execute unit tests
-        run: docker exec $(docker-compose ps -q api) python manage.py test myapp/tests
+        run: docker exec $(docker-compose ps -q api) python djangoProjectLab6/manage.py test djangoProjectLab6/myapp/tests
 
       - name: Commit and push documentation
         run: |
