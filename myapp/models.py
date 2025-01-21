@@ -19,13 +19,9 @@ class Product(models.Model):
     available = models.BooleanField()
 
     def clean(self):
-        try:
-            if self.price is not None:
-                DecimalField(self.price)
-                if self.price < 0:
-                    raise ValidationError("Price must be positive.")
-        except (TypeError):
-            raise ValidationError("Price must be a valid decimal number.")
+        super().clean()
+        if self.price is not None and self.price < 0:
+            raise ValidationError("Price must be positive.")
 
     def __str__(self):
         return self.name
