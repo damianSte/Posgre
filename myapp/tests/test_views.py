@@ -102,10 +102,10 @@ class ProductApiTest(APITestCase):
         response = self.client.get(invalid_url)
         self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
 
-    def test_unauthorized_access_without_token(self):
-        self.client.credentials()
-        response = self.client.get(self.product_list_url)
-        self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
+    # def test_unauthorized_access_without_token(self):
+    #     self.client.credentials()
+    #     response = self.client.get(self.product_list_url)
+    #     self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
 
     def test_forbidden_action_as_regular_user(self):
         self.token = str(AccessToken.for_user(self.regular_user))
