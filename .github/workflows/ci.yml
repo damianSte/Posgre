@@ -1,5 +1,5 @@
 name: software-engineering-lab-9
-####3
+
 on:
   push:
     branches:
@@ -8,14 +8,6 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
-
-    services:
-      db:
-        image: postgres:17
-        env:
-          POSTGRES_USER: testuser
-          POSTGRES_PASSWORD: testpassword
-          POSTGRES_DB: testdb
 
     steps:
       - name: Check out code
