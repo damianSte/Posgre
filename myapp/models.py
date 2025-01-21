@@ -1,7 +1,7 @@
-from django.core.exceptions import ValidationError
+from django.core.exceptions import ValidationError, InvalidOperation
 from django.db import models
 from django.db.models.fields import DecimalField
-
+from decimal import Decimal
 
 class Customer(models.Model):
     id = models.AutoField(primary_key=True)
@@ -19,9 +19,15 @@ class Product(models.Model):
     available = models.BooleanField()
 
     def clean(self):
-        super().clean()
-        if self.price is not None and self.price < 0:
-            raise ValidationError("Price must be positive.")
+        super().clean()  # Call the parent class's clean method
+        if self.price is not None:
+            try:
+                # Try to convert price to Decimal
+                self.price = Decimal(self.price)
+                if self.price < 0:
+                    raise ValidationError("Price must be positive.")
+            except (InvalidOperation, TypeError):
+                raise ValidationError("Price must be a valid decimal number.")
 
     def __str__(self):
         return self.name
