@@ -1,4 +1,5 @@
-from django.core.exceptions import ValidationError, InvalidOperation
+from django.core.exceptions import ValidationError
+from decimal import InvalidOperation
 from django.db import models
 from django.db.models.fields import DecimalField
 from decimal import Decimal
