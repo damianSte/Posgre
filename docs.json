@@ -14,6 +14,12 @@ paths:
         description: A search term.
         schema:
           type: string
+      - name: ordering
+        required: false
+        in: query
+        description: Which field to use when ordering the results.
+        schema:
+          type: string
       responses:
         '200':
           content:
@@ -66,6 +72,12 @@ paths:
         description: A search term.
         schema:
           type: string
+      - name: ordering
+        required: false
+        in: query
+        description: Which field to use when ordering the results.
+        schema:
+          type: string
       responses:
         '200':
           content:
@@ -89,6 +101,12 @@ paths:
         required: false
         in: query
         description: A search term.
+        schema:
+          type: string
+      - name: ordering
+        required: false
+        in: query
+        description: Which field to use when ordering the results.
         schema:
           type: string
       requestBody:
@@ -127,6 +145,12 @@ paths:
         description: A search term.
         schema:
           type: string
+      - name: ordering
+        required: false
+        in: query
+        description: Which field to use when ordering the results.
+        schema:
+          type: string
       requestBody:
         content:
           application/json:
@@ -161,6 +185,12 @@ paths:
         required: false
         in: query
         description: A search term.
+        schema:
+          type: string
+      - name: ordering
+        required: false
+        in: query
+        description: Which field to use when ordering the results.
         schema:
           type: string
       responses:
