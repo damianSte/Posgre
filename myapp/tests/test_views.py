@@ -82,12 +82,14 @@ class ProductApiTest(APITestCase):
         # Ensure no credentials are set
         self.client.credentials()
         response = self.client.get(self.product_list_url)
+        print(response.status_code, response.data)  # Debugging line
         self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
 
     def test_unauthorized_access_without_token(self):
         # Ensure no credentials are set
         self.client.credentials()
         response = self.client.get(self.product_list_url)
+        print(response.status_code, response.data)  # Debugging line
         self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
 
     def test_create_product_invalid_price(self):
