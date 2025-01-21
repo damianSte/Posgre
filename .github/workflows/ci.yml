@@ -30,8 +30,7 @@ jobs:
         run: docker-compose up --build -d
 
       - name: Execute unit tests
-        run: docker exec $(docker-compose ps -q api) python djangoProjectLab6/manage.py test djangoProjectLab6/myapp/tests
-
+        run: docker exec $(docker-compose ps -q api) python /manage.py test /myapp/tests
 
   docs:
     runs-on: ubuntu-latest
@@ -56,13 +55,7 @@ jobs:
       - name: Generate API documentation
         run: |
           source venv/bin/activate
-          python djangoProjectLab6/manage.py generateschema > docs.json
-
-      - name: Build and start Containers
-        run: docker-compose up --build -d
-
-      - name: Execute unit tests
-        run: docker exec $(docker-compose ps -q api) python djangoProjectLab6/manage.py test djangoProjectLab6/myapp/tests
+          python /manage.py generateschema > docs.json
 
       - name: Commit and push documentation
         run: |
